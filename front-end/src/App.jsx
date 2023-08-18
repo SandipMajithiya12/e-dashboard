@@ -6,6 +6,7 @@ import Nav from './components/Nav'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Signup from './components/Signup'
 import PrivateComponent from './components/PrivateComponent'
+import Login from './components/login'
 
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
 
         </Route>
         <Route path='/signup' element={<Signup />}/>
+        <Route path='/login' element={<Login />}/>
         
 
 
