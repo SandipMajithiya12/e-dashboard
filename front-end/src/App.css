@@ -54,7 +54,7 @@
   padding: 10px;
   font-size: 26px;
   font-weight: bold;
-  color: rgb(3, 67, 67);;
+  color: rgb(3, 67, 67);
 }
 .cart input{
   margin: 10px 0;
@@ -80,4 +80,29 @@
 }
 .cartaddproduct{
   height: 350px;
+}
+.invalid_error{
+  color: red;
+  margin-top: -10px;
+  display: block;
+  margin-left: 20px;
+
+}
+.product_list{
+  text-align: center;
+  margin-top: 40px;
+  
+}
+.product_list ul li
+{
+  display: inline-block;
+  border: 1.5px solid  rgb(3, 67, 67);
+  font-size: large;
+  padding: 5px 90px 5px 90px;
+  font-weight: bold;
+  color :rgb(27, 92, 92)
+  
+}
+.product_list ul{
+  margin: 0;
 }
