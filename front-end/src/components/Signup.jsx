@@ -5,6 +5,7 @@ const Signup = () => {
   const [name, setName] = useState("");
   const [email, setMail] = useState("");
   const [pwd, setPwd] = useState("");
+  const [error,setError] = useState('');
   const usenav = useNavigate();
 
   useEffect(() => {
@@ -15,6 +16,10 @@ const Signup = () => {
   },[]);
 
   const collectdata = async () => {
+    if(!name || !email || !pwd){
+      setError(true);
+      return false;
+    }
     console.log(name, email, pwd);
     let result = await fetch("http://127.0.0.1:5000/register", {
       method: "post",
@@ -40,18 +45,21 @@ const Signup = () => {
           value={name}
           onChange={(e) => setName(e.target.value)}
         />
+         {error && !name && <span className="invalid_error">Enter  name</span>}
         <input
           type="email"
           placeholder="Enter mail"
           value={email}
           onChange={(e) => setMail(e.target.value)}
         />
+         {error && !email && <span className="invalid_error">Enter email</span>}
         <input
           type="password"
           placeholder="Enter Password"
           value={pwd}
           onChange={(e) => setPwd(e.target.value)}
         />
+         {error && !pwd && <span className="invalid_error">Enter Password</span>}
 
         <button onClick={collectdata}>signup</button>
       </div>

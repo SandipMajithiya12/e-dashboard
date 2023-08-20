@@ -127,5 +127,13 @@
   background-color: #e2e2e2;
   color:  cadetblue ;
 }
+.btn a{
+  text-decoration: none;
+  color: #ffffff;
+}
+.btn a:hover{
+  background-color: #e2e2e2;
+  color:  cadetblue ;
+}
 
 
