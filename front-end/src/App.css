@@ -95,7 +95,7 @@
   
 }
 .product_list h1{
-  padding-bottom: 20px;
+  padding-bottom: 10px;
   color: cadetblue;
 }
 .product_list ul li
@@ -113,6 +113,10 @@
 }
 .product_list ul{
   margin: 0;
+}
+.product_list h2{
+  color: cadetblue;
+  margin-top: 50px;
 }
 .deletebtn{
   border-style: none;
@@ -136,4 +140,12 @@
   color:  cadetblue ;
 }
 
+.serachbox{
+  width: 400px;
+  margin: 20px;
+  height: 50px;
+  border-radius: 100px;
+  border: 5px solid rgb(16, 98, 98);
+  padding-left: 20px;
 
+}
