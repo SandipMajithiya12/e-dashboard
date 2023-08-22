@@ -18,7 +18,7 @@ function App() {
   return ( 
     <>
     <BrowserRouter>
-      <Nav/>
+      <Nav />
       <Routes>
         <Route element ={<PrivateComponent />}>
         
@@ -32,7 +32,6 @@ function App() {
         </Route>
         <Route path='/signup' element={<Signup />}/>
         <Route path='/login' element={<Login />}/>
-        
 
 
       </Routes>

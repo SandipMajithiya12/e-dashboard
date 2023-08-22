@@ -4,6 +4,8 @@ const User = require("./db/user");
 
 const cors = require("cors");
 const Product = require("./db/Product");
+const jwt = require("jsonwebtoken");
+const jwtkey = "e-comm";
 
 const app = express();
 app.use(cors());
@@ -13,13 +15,23 @@ app.post("/register", async (req, resp) => {
   let result = await user.save();
   result = result.toObject();
   delete result.pwd;
-  resp.send(result);
+  jwt.sign({ result }, jwtkey, { expiresIn: "2h" }, (error, token) => {
+    if (error) {
+      resp.send({ result: "somthing went to wrong" });
+    }
+    resp.send({ result, auth: token });
+  });
 });
 app.post("/login", async (req, resp) => {
   let user = await User.findOne(req.body).select("-pwd");
   if (req.body.pwd && req.body.email) {
     if (user) {
-      resp.send(user);
+      jwt.sign({ user }, jwtkey, { expiresIn: "2h" }, (error, token) => {
+        if (error) {
+          resp.send({ result: "somthing went to wrong" });
+        }
+        resp.send({ user, auth: token });
+      });
     } else {
       resp.send({ result: "No user found" });
     }
@@ -27,12 +39,12 @@ app.post("/login", async (req, resp) => {
     resp.send({ result: "No user found" });
   }
 });
-app.post("/add-product", async (req, resp) => {
+app.post("/add-product",verfiryToken, async (req, resp) => {
   let product = new Product(req.body);
   let result = await product.save();
   resp.send(result);
 });
-app.get("/products", async (req, resp) => {
+app.get("/products",verfiryToken, async (req, resp) => {
   let products = await Product.find();
   if (products.length > 0) {
     resp.send(products);
@@ -40,11 +52,11 @@ app.get("/products", async (req, resp) => {
     resp.send({ result: "No products found " });
   }
 });
-app.delete("/product/:id", async (req, resp) => {
+app.delete("/product/:id",verfiryToken, async (req, resp) => {
   const result = await Product.deleteOne({ _id: req.params.id });
   resp.send(result);
 });
-app.get("/product/:id", async (req, resp) => {
+app.get("/product/:id", verfiryToken,async (req, resp) => {
   const result = await Product.findOne({ _id: req.params.id });
   if (result) {
     resp.send(result);
@@ -52,7 +64,7 @@ app.get("/product/:id", async (req, resp) => {
     resp.send({ result: "No result found" });
   }
 });
-app.put("/product/:id", async (req, resp) => {
+app.put("/product/:id",verfiryToken, async (req, resp) => {
   let result = await Product.updateOne(
     { _id: req.params.id },
     {
@@ -61,7 +73,7 @@ app.put("/product/:id", async (req, resp) => {
   );
   resp.send(result);
 });
-app.get("/search/:key", async (req, resp) => {
+app.get("/search/:key", verfiryToken,async (req, resp) => {
   let result = await Product.find({
     $or: [
       { name: { $regex: req.params.key } },
@@ -71,5 +83,26 @@ app.get("/search/:key", async (req, resp) => {
   });
   resp.send(result);
 });
+function verfiryToken(req,resp,next){
+  let token = req.headers['authorization'];
+  if(token)
+  {
+    token = token.split(' ')[1];
+    jwt.verify(token,jwtkey,(error,valid)=>{
+      if(error){
+        resp.send({result : "Please provide valid token"})
+
+      }
+      else{
+        next();
+      }
+    })
+    
+  }
+  else{
+      resp.send({result : "Please add token with header"})
+  }
+
+}
 
 app.listen(5000);
