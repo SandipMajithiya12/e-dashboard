@@ -65,6 +65,7 @@ const Login = () => {
           value={email}
           onChange={(e) => setMail(e.target.value)}
         />
+        <div className="pwdmanage">
         <input className="icon"
           type={type}
           placeholder="Enter Password"
@@ -72,7 +73,7 @@ const Login = () => {
           onChange={(e) => setPwd(e.target.value)}
         />
       <span onClick={handletoggle}>  <Icon size={20} icon={icon}></Icon></span>
-     
+      </div>
       
       
     <button onClick={handlelogin}>Login</button>

@@ -2,6 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+ 
 }
 
 .nav ul li{
@@ -12,7 +13,7 @@
 .nav ul{
   padding: 5px;
   margin: 0;
-  background-color: rgb(27, 92, 92);
+  background-color: #1b3358;
 }
 .nav1{
   text-align: right;
@@ -23,14 +24,14 @@
   cursor: pointer;
 }
 .nav ul li a:hover{
-  color: black;
+  color:black;
 }
 .footer{
   position: absolute;
   bottom: 0;
   width: 100%;
   text-align: center; 
-  background-color: rgb(27, 92, 92);
+  background-color:  #1b3358;
   color: aliceblue;
 }
 .register {
@@ -150,3 +151,21 @@
   padding-left: 20px;
 
 }
+.pwdmanage{
+display: flex;
+align-items: center;
+justify-content: space-around;
+}
+.pwdmanage input{
+  border-radius: 0;
+}
+.pwdmanage span{
+  margin: 10px 0;
+  
+  background-color: #e2e2e2;
+  border: none;
+  outline: none;
+  padding: 9px 20px;
+ 
+}
+

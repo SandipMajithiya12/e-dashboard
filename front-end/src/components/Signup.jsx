@@ -74,14 +74,14 @@ const Signup = () => {
           onChange={(e) => setMail(e.target.value)}
         />
          {error && !email && <span className="invalid_error">Enter email</span>}
-        <input
+       <div className="pwdmanage"><input
           type={type}
           placeholder="Enter Password"
           value={pwd}
           onChange={(e) => setPwd(e.target.value)}
         />     
          <span onClick={handletoggle}>  <Icon size={20} icon={icon}></Icon></span>
-     
+         </div> 
          {error && !pwd && <span className="invalid_error">Enter Password</span>}
 
         <button onClick={collectdata}>signup</button>
