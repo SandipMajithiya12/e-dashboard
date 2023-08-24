@@ -1,5 +1,8 @@
 import { useState ,useEffect} from "react";
 import { useNavigate } from "react-router-dom";
+import {eye} from 'react-icons-kit/feather/eye';
+import {eyeOff} from 'react-icons-kit/feather/eyeOff';
+import { Icon } from "react-icons-kit";
 const Login = () => {
     const usenav = useNavigate();
     useEffect(() => {
@@ -8,8 +11,8 @@ const Login = () => {
           usenav("/");
         }
       },[]);
-    
-
+    const[type,setType] = useState('password');
+    const [icon,setIcom]= useState(eyeOff);
     const [pwd, setPwd] = useState("");
   const [email, setMail] = useState("");
   const handlelogin =async ()=>{
@@ -34,23 +37,44 @@ const Login = () => {
         alert("Plz enter vaild detail")
     }
   }
+  const handletoggle=()=>
+  {
+      if(type === 'password')
+      {
+        setIcom(eye);
+        setType('text');
+      }
+      else
+      {
+        setIcom(eyeOff);
+        setType('password');
+      }
+      console.log("sucses")
+  }
+ 
+ 
   return (
     <div className="register">
       <div className="cart cart1">
+        
         <h1>Login</h1>
-    
+
         <input
           type="email"
           placeholder="Enter mail"
           value={email}
           onChange={(e) => setMail(e.target.value)}
         />
-        <input
-          type="password"
+        <input className="icon"
+          type={type}
           placeholder="Enter Password"
           value={pwd}
           onChange={(e) => setPwd(e.target.value)}
         />
+      <span onClick={handletoggle}>  <Icon size={20} icon={icon}></Icon></span>
+     
+      
+      
     <button onClick={handlelogin}>Login</button>
         
       </div>

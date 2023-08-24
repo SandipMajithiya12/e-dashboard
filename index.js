@@ -5,12 +5,14 @@ const User = require("./db/user");
 const cors = require("cors");
 const Product = require("./db/Product");
 const jwt = require("jsonwebtoken");
+const user = require("./db/user");
 const jwtkey = "e-comm";
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 app.post("/register", async (req, resp) => {
+  
   let user = new User(req.body);
   let result = await user.save();
   result = result.toObject();
@@ -21,7 +23,9 @@ app.post("/register", async (req, resp) => {
     }
     resp.send({ result, auth: token });
   });
+
 });
+
 app.post("/login", async (req, resp) => {
   let user = await User.findOne(req.body).select("-pwd");
   if (req.body.pwd && req.body.email) {
